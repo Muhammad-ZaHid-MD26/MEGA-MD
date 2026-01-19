@@ -11,15 +11,15 @@ module.exports = {
     const chatId = context.chatId || message.key.remoteJid;
 
     try {
-      const res = await axios.get('https://discardapi.dpdns.org/api/img/programming?apikey=guru');
+      const res = await axios.get('https://raw.githubusercontent.com/GlobalTechInfo/Database/main/images/coding.json');
 
-      if (!res.data || res.data.status !== true || !res.data.result) {
+      if (!res.data || !Array.isArray(res.data) || res.data.length === 0) {
         return await sock.sendMessage(chatId, { text: '❌ Failed to fetch image.' }, { quoted: message });
       }
 
-      const imageUrl = res.data.result;
+      const randomImage = res.data[Math.floor(Math.random() * res.data.length)];
 
-      await sock.sendMessage(chatId, { image: { url: imageUrl }, caption: '💻 Programming Image' }, { quoted: message });
+      await sock.sendMessage(chatId, { image: { url: randomImage }, caption: '💻 Programming Image' }, { quoted: message });
 
     } catch (err) {
       console.error('Programming image plugin error:', err);

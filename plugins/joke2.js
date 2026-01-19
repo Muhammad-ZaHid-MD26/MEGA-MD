@@ -11,19 +11,21 @@ module.exports = {
     const chatId = context.chatId || message.key.remoteJid;
 
     try {
-      const res = await axios.get('https://discardapi.dpdns.org/api/joke/general?apikey=guru');
+      const res = await axios.get('https://raw.githubusercontent.com/GlobalTechInfo/Database/main/text/random_jokes.txt');
 
-      if (!res.data || res.data.status !== true) {
+      if (!res.data) {
         return await sock.sendMessage(chatId, { text: '❌ Failed to fetch joke.' }, { quoted: message });
       }
 
-      const setup = res.data.result?.setup || 'No setup found';
-      const punchline = res.data.result?.punchline || 'No punchline found';
-      const creator = res.data.creator || 'Unknown';
+      const jokes = res.data.split('\n').filter(line => line.trim() !== '');
+      
+      if (jokes.length === 0) {
+        return await sock.sendMessage(chatId, { text: '❌ No jokes available.' }, { quoted: message });
+      }
 
-      const replyText = `😂 *Joke*\n\n${setup}\n\n👉 ${punchline}`;
+      const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
 
-      await sock.sendMessage(chatId, { text: replyText }, { quoted: message });
+      await sock.sendMessage(chatId, { text: `😂 *Joke*\n\n${randomJoke}` }, { quoted: message });
 
     } catch (err) {
       console.error('Joke plugin error:', err);

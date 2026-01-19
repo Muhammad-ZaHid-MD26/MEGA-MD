@@ -2,9 +2,9 @@ const store = require('../lib/lightweight_store');
 const axios = require('axios');
 
 const QUOTE_URLS = [
-  'https://raw.githubusercontent.com/GlobalTechInfo/Islamic-Database/main/TXT-DATA/Quotes.txt',
-  'https://raw.githubusercontent.com/GlobalTechInfo/Islamic-Database/main/TXT-DATA/Motivational.txt',
-  'https://raw.githubusercontent.com/GlobalTechInfo/Islamic-Database/main/TXT-DATA/PickupLines.txt'
+  'https://raw.githubusercontent.com/GlobalTechInfo/Islamic-Database/main/text/random_quotes.txt',
+  'https://raw.githubusercontent.com/GlobalTechInfo/Islamic-Database/main/text/motivational_quotes.txt',
+  'https://raw.githubusercontent.com/GlobalTechInfo/Islamic-Database/main/text/pickup_quotes.txt'
 ];
 
 let cachedQuotes = [];

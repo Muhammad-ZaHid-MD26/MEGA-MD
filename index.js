@@ -465,7 +465,7 @@ async function startQasimDev() {
             
             if (connection == "open") {
                 printLog('success', 'Bot connected successfully!');
-                const { startAutoBio } = require('./plugins/a-setbio');
+                const { startAutoBio } = require('./plugins/setbio');
                 startAutoBio(QasimDev); 
                 const ghostMode = await store.getSetting('global', 'stealthMode');
                 if (ghostMode && ghostMode.enabled) {
